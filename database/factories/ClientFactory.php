@@ -14,6 +14,6 @@ $factory->define(Client::class, function (Faker $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'birth' => $faker->date('Y-m-d','2000-01-01'),
-        'phone' => PhoneNumber::phoneNumberCleared()
+        'phone' =>  "(" . PhoneNumber::areaCode() . ") " . PhoneNumber::phone()
     ];
 });
