@@ -12,8 +12,8 @@ class ClientController extends Controller
         $client = Client::all();
         return
             ($client->count() === 0)
-            ? response()->json($client)
-            : response()->json('Sem Clientes cadastrados');
+            ? response()->json('Sem Clientes cadastrados')
+            : response()->json($client);
     }
 
     public function create()
@@ -24,11 +24,13 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
+        // return response()->json($request->input());
+
         $client = new Client();
 
         $client->name = $request->name;
         $client->email = $request->email;
-        $client->birth = $request->birth;
+        $client->birth = date('Y-m-d', strtotime($request->birth));
         $client->phone = $request->phone;
 
         return ($client->save())
